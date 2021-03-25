@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-MAINTAINER Thales da Silva Neves
+LABEL Thales da Silva Neves
 
 WORKDIR /app
 

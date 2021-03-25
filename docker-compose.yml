@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mysql-app:
+    image: mysql:8.0.21
+    container_name: meu-mysql
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+    ports: 
+      - 3306:3306
+    networks: 
+      - minha-rede
+
+  rental-cars-app:
+    build: 
+      dockerfile: ./Dockerfile
+      context: .
+    image: rental-cars
+    restart: on-failure
+    container_name: rental-cars
+    ports:
+      - 8080:8080
+    networks: 
+      - minha-rede
+    depends_on: 
+      - mysql-app
+
+networks: 
+  minha-rede:
+    driver: bridge
+    name: minha-rede
